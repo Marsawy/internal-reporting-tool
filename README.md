@@ -1,3 +1,4 @@
+# internal-reporting-tool
 ### Introduction For Log Analysis
 
 This is the third project for the Udacity Full Stack Web Development Nanodegree. Being new to databases this project ,  it create complex SQL queries to access a very large database (> 1000k rows) and extract specific data and print it out. This project is an internal reporting tool by taking log data and calculating statistics from it.
@@ -41,10 +42,3 @@ he database in question is a newspaper company database where we have 3 tables; 
 python IRT.py
 
 ```
-
-
-
-
-
- 
-# internal-reporting-tool
