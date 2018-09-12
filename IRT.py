@@ -3,14 +3,13 @@
 import psycopg2
 
 PopularTitle = 'What are the most popular three articles of all time?'
-PopularQuery ="""
+PopularQuery = """
 SELECT title, count(*) as num FROM articles, log
       WHERE articles.slug = substring(log.path, 10)
       GROUP BY title ORDER BY num DESC LIMIT 3;
 """
-
 MostTitle = 'Who are the most popular article authors of all time?'
-MostQuery ="""
+MostQuery = """
 SELECT authors.name, count(*) AS num
       FROM articles
       JOIN authors on articles.author = authors.id
@@ -20,18 +19,21 @@ SELECT authors.name, count(*) AS num
 """
 
 ErrorTitle = 'On which days did more than 1% of requests lead to errors?'
-ErrorQuery ="""
+ErrorQuery = """
 SELECT * FROM (
     SELECT m.day,
     round(cast((100*n.click) as numeric) / cast(m.click as numeric), 2)
     as ep FROM
-        (SELECT date(time) as day, count(*) as click FROM log GROUP BY day) as m
-        JOIN
-        (SELECT date(time) as day, count(*) as click FROM log WHERE status
+        (SELECT date(time) as day, count(*) as click FROM log
+        GROUP BY day) as m
+        JOINs
+        (SELECT date(time) as day, count(*) as click FROM log
+        WHERE status
         LIKE '%NOT FOUND%' GROUP BY day) as n
     on m.day = n.day)
 as f WHERE ep > 1.0;
 """
+
 
 class Queires:
     def __init__(self):
